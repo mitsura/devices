@@ -2,7 +2,7 @@
 
 var mean = require('meanio');
 
-exports.render = function(req, res) {
+exports.render = function (req, res) {
 
   var modules = [];
   // Preparing angular modules list with dependencies

@@ -1,7 +1,8 @@
+/*global angular*/
 'use strict';
 
 angular.module('mean.system').controller('HeaderController', ['$scope', '$rootScope', 'Global', 'Menus',
-  function($scope, $rootScope, Global, Menus) {
+  function ($scope, $rootScope, Global, Menus) {
     $scope.global = Global;
     $scope.menus = {};
 
@@ -14,7 +15,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
       Menus.query({
         name: name,
         defaultMenu: defaultMenu
-      }, function(menu) {
+      }, function (menu) {
         $scope.menus[name] = menu;
       });
     }
@@ -24,15 +25,15 @@ angular.module('mean.system').controller('HeaderController', ['$scope', '$rootSc
 
     $scope.isCollapsed = false;
 
-    $rootScope.$on('loggedin', function() {
+    $rootScope.$on('loggedin', function () {
 
       queryMenu('main', defaultMainMenu);
 
       $scope.global = {
-        authenticated: !! $rootScope.user,
+        authenticated: !!$rootScope.user,
         user: $rootScope.user
       };
     });
 
   }
-]);
+  ]);

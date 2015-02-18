@@ -1,10 +1,11 @@
+/*global angular*/
 'use strict';
 
 angular.module('mean-factory-interceptor', [])
   .factory('httpInterceptor', ['$q', '$location',
-    function($q, $location) {
+    function ($q, $location) {
       return {
-        'response': function(response) {
+        response: function (response) {
           if (response.status === 401) {
             $location.path('/auth/login');
             return $q.reject(response);
@@ -12,7 +13,7 @@ angular.module('mean-factory-interceptor', [])
           return response || $q.when(response);
         },
 
-        'responseError': function(rejection) {
+        responseError: function (rejection) {
 
           if (rejection.status === 401) {
             $location.url('/auth/login');
@@ -23,10 +24,10 @@ angular.module('mean-factory-interceptor', [])
 
       };
     }
-  ])
-//Http Interceptor to check auth failures for XHR requests
-.config(['$httpProvider',
-  function($httpProvider) {
-    $httpProvider.interceptors.push('httpInterceptor');
-  }
-]);
+    ])
+  //Http Interceptor to check auth failures for XHR requests
+  .config(['$httpProvider',
+    function ($httpProvider) {
+      $httpProvider.interceptors.push('httpInterceptor');
+    }
+    ]);
